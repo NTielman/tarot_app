@@ -36,6 +36,7 @@ class TarotCard extends StatefulWidget {
 
 class _TarotCardState extends State<TarotCard> {
   String _cardName = 'pe02';
+  bool _cardOrientation = true;
   final List<String> _cardTypes = ['ar', 'cu', 'pe', 'sw', 'wa'];
   final List<String> _arcanaValues = [
     '00',
@@ -86,6 +87,7 @@ class _TarotCardState extends State<TarotCard> {
 
     setState(() {
       _cardName = '$suite$value';
+      _cardOrientation = Random().nextBool();
     });
   }
 
@@ -109,7 +111,9 @@ class _TarotCardState extends State<TarotCard> {
                   'images/$_cardName.jpg',
                 ),
                 fit: BoxFit.cover,
-                alignment: Alignment.topLeft,
+                alignment: _cardOrientation
+                    ? Alignment.topLeft
+                    : Alignment.bottomRight,
               ),
               border: Border.all(
                 width: 5.0,
@@ -124,5 +128,4 @@ class _TarotCardState extends State<TarotCard> {
 }
 
 // TODO: add static card "back"image
-// TODO:change orientation randomly
 // TODO: style to look like tarot app
