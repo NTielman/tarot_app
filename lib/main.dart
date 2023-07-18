@@ -77,8 +77,9 @@ class TarotCard extends StatefulWidget {
 }
 
 class _TarotCardState extends State<TarotCard> {
-  String _cardName = 'pe02';
+  String _cardName = '';
   bool _cardOrientation = true;
+  bool _firstTap = true;
   final List<String> _cardTypes = ['ar', 'cu', 'pe', 'sw', 'wa'];
   final List<String> _arcanaValues = [
     '00',
@@ -122,6 +123,12 @@ class _TarotCardState extends State<TarotCard> {
   ];
 
   void _handleTap() {
+    if (_firstTap) {
+      setState(() {
+        _firstTap = false;
+      });
+    }
+
     String suite = _cardTypes[Random().nextInt(_cardTypes.length)];
     String value = suite == 'ar'
         ? _arcanaValues[Random().nextInt(_arcanaValues.length)]
@@ -140,10 +147,12 @@ class _TarotCardState extends State<TarotCard> {
       child: SizedBox(
         width: 290.0,
         height: 460.0,
-        child: CardFront(
-          cardName: _cardName,
-          cardOrientation: _cardOrientation,
-        ),
+        child: _firstTap
+            ? const CardBack()
+            : CardFront(
+                cardName: _cardName,
+                cardOrientation: _cardOrientation,
+              ),
       ),
     );
   }
@@ -275,4 +284,3 @@ class CardFront extends StatelessWidget {
     );
   }
 }
-// TODO: show card back on first load when not clicked yet
