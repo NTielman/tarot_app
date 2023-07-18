@@ -140,45 +140,139 @@ class _TarotCardState extends State<TarotCard> {
       child: SizedBox(
         width: 290.0,
         height: 460.0,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 10.0,
-            ),
-            boxShadow: const [
-              BoxShadow(
-                offset: Offset(0, 20),
-                blurRadius: 50,
-                color: Color.fromRGBO(6, 6, 5, 0.5),
-              ),
-              BoxShadow(
-                offset: Offset(3, 3),
-                blurRadius: 2,
-                color: Color.fromRGBO(6, 6, 5, 0.25),
-              ),
-            ],
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'images/$_cardName.jpg',
-                ),
-                fit: BoxFit.cover,
-                alignment: _cardOrientation
-                    ? Alignment.topLeft
-                    : Alignment.bottomRight,
-              ),
-              border: Border.all(
-                width: 5.0,
-                color: Colors.white,
-              ),
-            ),
-          ),
+        child: CardFront(
+          cardName: _cardName,
+          cardOrientation: _cardOrientation,
         ),
       ),
     );
   }
 }
 
-// TODO: add static card "back"image
+class CardBack extends StatelessWidget {
+  const CardBack({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(color: Color(0xff2b2b2b)),
+        ),
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(-1, -1),
+              end: Alignment(-0.5, -0.8),
+              colors: [
+                Colors.black,
+                Colors.black,
+                Colors.transparent,
+                Colors.transparent,
+                Colors.black,
+              ],
+              stops: [0.0, 0.25, 0.25, 0.75, 0.75],
+              tileMode: TileMode.repeated,
+            ),
+          ),
+        ),
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(1, -1),
+              end: Alignment(0.5, -0.8),
+              colors: [
+                Color(0xff1e1e1e),
+                Colors.black,
+                Colors.transparent,
+                Colors.transparent,
+                Color(0xff1e1e1e),
+              ],
+              stops: [0.0, 0.25, 0.25, 0.75, 0.75],
+              tileMode: TileMode.repeated,
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: const Alignment(-1, -1),
+              end: const Alignment(-0.5, -0.8),
+              colors: [
+                const Color(0xffb1b1b1).withOpacity(0.7),
+                Colors.transparent,
+              ],
+              stops: const [0, 0.02],
+              tileMode: TileMode.repeated,
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: const Alignment(1, -1),
+              end: const Alignment(0.5, -0.8),
+              colors: [
+                const Color(0xffb1b1b1).withOpacity(0.7),
+                Colors.transparent,
+              ],
+              stops: const [0, 0.02],
+              tileMode: TileMode.repeated,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CardFront extends StatelessWidget {
+  final String cardName;
+  final bool cardOrientation;
+
+  const CardFront({
+    super.key,
+    required this.cardName,
+    required this.cardOrientation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 10.0,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            offset: Offset(0, 20),
+            blurRadius: 50,
+            color: Color.fromRGBO(6, 6, 5, 0.5),
+          ),
+          BoxShadow(
+            offset: Offset(3, 3),
+            blurRadius: 2,
+            color: Color.fromRGBO(6, 6, 5, 0.25),
+          ),
+        ],
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'images/$cardName.jpg',
+            ),
+            fit: BoxFit.cover,
+            alignment:
+                cardOrientation ? Alignment.topLeft : Alignment.bottomRight,
+          ),
+          border: Border.all(
+            width: 5.0,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+// TODO: show card back on first load when not clicked yet
