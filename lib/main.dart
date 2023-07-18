@@ -3,10 +3,17 @@ import 'dart:math';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: TarotApp(),
+    MaterialApp(
+      home: const TarotApp(),
       debugShowCheckedModeBanner: false,
       title: 'Daily Tarot',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color.fromRGBO(6, 5, 12, 1),
+        ),
+        fontFamily: 'Playfair',
+        highlightColor: const Color.fromRGBO(250, 250, 250, 1),
+      ),
     ),
   );
 }
@@ -18,11 +25,46 @@ class TarotApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Daily Tarot'),
+        title: const Text(
+          'Daily Tarot',
+          style: TextStyle(fontSize: 25),
+        ),
       ),
-      body: const Center(
-        child: TarotCard(),
+      body: const Stack(
+        children: [
+          BackgroundImage(),
+          Center(
+            child: TarotCard(),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class BackgroundImage extends StatelessWidget {
+  const BackgroundImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                  'https://images.unsplash.com/photo-1454177697940-c43d9f9a7307?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            backgroundBlendMode: BlendMode.color,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -103,6 +145,18 @@ class _TarotCardState extends State<TarotCard> {
             border: Border.all(
               width: 10.0,
             ),
+            boxShadow: const [
+              BoxShadow(
+                offset: Offset(0, 20),
+                blurRadius: 50,
+                color: Color.fromRGBO(6, 6, 5, 0.5),
+              ),
+              BoxShadow(
+                offset: Offset(3, 3),
+                blurRadius: 2,
+                color: Color.fromRGBO(6, 6, 5, 0.25),
+              ),
+            ],
           ),
           child: Container(
             decoration: BoxDecoration(
@@ -128,4 +182,3 @@ class _TarotCardState extends State<TarotCard> {
 }
 
 // TODO: add static card "back"image
-// TODO: style to look like tarot app
