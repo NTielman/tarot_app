@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(
@@ -121,8 +122,10 @@ class _TarotCardState extends State<TarotCard> {
     'pa',
     'qu'
   ];
+  final AudioPlayer player = AudioPlayer();
 
-  void _handleTap() {
+  void _handleTap() async {
+    await player.play(AssetSource('card-flip.wav'));
     if (_firstTap) {
       setState(() {
         _firstTap = false;
@@ -284,3 +287,8 @@ class CardFront extends StatelessWidget {
     );
   }
 }
+
+// TODO: clicked card should be gotten by api call
+// TODO: fetch random card + print to console
+// TODO: using card id change image presented
+// TODO: longpress card should display card modal with info?
