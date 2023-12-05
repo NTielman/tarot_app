@@ -1,16 +1,24 @@
-# daily_tarot
+# Daily Tarot App
+---
 
-A new Flutter project.
+## Description
+A mobile version of the [Tarot Reader web application](https://github.com/NTielman/Tarot-Reader)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Languages, Libraries & Frameworks
+* Dart
+* Flutter
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Setup
+Clone the repository to a local directory
+cd into the directory and run `dart main.dart`or click on the debugger play icon to run in debug mode
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Screenshots
+![ezgif com-video-to-gif (1)](https://github.com/NTielman/tarot_app/assets/70571238/b988d010-8e3e-48b7-94f9-efe478fbe140)
+
+
+## Credits
+* This web app makes use of [E Kelen's](https://github.com/ekelen) tarot-api for the tarot meanings and descriptions. repository can be found at: https://github.com/ekelen/tarot-api
+* This web app makes use of [Bennion Kearny's](https://www.bennionkearny.com/) free printable tarot deck (with some added filters) for the card images. images can be found at: https://www.bennionkearny.com/wp-content/uploads/2019/11/Tarot-Card-Deck.pdf
